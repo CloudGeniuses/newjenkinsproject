@@ -27,18 +27,20 @@ pipeline {
         }
         stage('Push Docker Image to ECR') {
             steps {
-                withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
-                    sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}"
-                    sh "docker tag ${DOCKER_IMAGE}:latest ${ECR_URI}:latest"
-                    sh "docker push ${ECR_URI}:latest"
+                script {
+                    withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
+                        sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}"
+                        sh "docker tag ${DOCKER_IMAGE}:latest ${ECR_URI}:latest"
+                        sh "docker push ${ECR_URI}:latest"
+                    }
                 }
             }
         }
         /*
         stage('Integrate Jenkins with EKS Cluster and Deploy App') {
             steps {
-                withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
-                    script {
+                script {
+                    withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
                         sh "aws eks --region ${AWS_REGION} update-kubeconfig --name ${EKS_CLUSTER}"
                         sh "/var/lib/jenkins/kubectl apply -f eks-deploy-k8s.yaml"
                     }
