@@ -3,7 +3,6 @@ pipeline {
     environment {
         ECR_URI = "211125403425.dkr.ecr.us-east-2.amazonaws.com/cloudgenius"
         AWS_REGION = 'us-east-2'
-        // EKS_CLUSTER = 'cloudgeniusk8s' // Commented out for now
         DOCKER_IMAGE = 'cloudgenius'
     }
     tools {
@@ -28,8 +27,11 @@ pipeline {
         stage('Push Docker Image to ECR') {
             steps {
                 script {
+                    // AWS Login using withAWS
                     withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
+                        // Get ECR login password and login
                         sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}"
+                        // Tag and push the Docker image
                         sh "docker tag ${DOCKER_IMAGE}:latest ${ECR_URI}:latest"
                         sh "docker push ${ECR_URI}:latest"
                     }
