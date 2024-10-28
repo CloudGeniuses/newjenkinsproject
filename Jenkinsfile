@@ -3,7 +3,7 @@ pipeline {
     environment {
         ECR_URI = "211125403425.dkr.ecr.us-east-2.amazonaws.com/cloudgenius"
         AWS_REGION = 'us-east-2'
-        EKS_CLUSTER = 'cloudgeniusk8s'
+        // EKS_CLUSTER = 'cloudgeniusk8s' // Commented out for now
         DOCKER_IMAGE = 'cloudgenius'
     }
     tools {
@@ -34,6 +34,7 @@ pipeline {
                 }
             }
         }
+        /*
         stage('Integrate Jenkins with EKS Cluster and Deploy App') {
             steps {
                 withAWS(credentials: 'aws-credentials', region: "${AWS_REGION}") {
@@ -44,5 +45,6 @@ pipeline {
                 }
             }
         }
+        */
     }
 }
