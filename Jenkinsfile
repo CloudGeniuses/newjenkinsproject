@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Push Docker Image to ECR') {
             steps {
-                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                withAWS(credentials: 'aws-cred', region: 'us-east-1') {
                     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 211125403425.dkr.ecr.us-east-1.amazonaws.com'
                     sh 'docker tag cloudgenius:latest 211125403425.dkr.ecr.us-east-1.amazonaws.com/cloudgenius:latest'
                     sh 'docker push 211125403425.dkr.ecr.us-east-1.amazonaws.com/cloudgenius:latest'
