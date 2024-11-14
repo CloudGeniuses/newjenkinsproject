@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-springboot-app
-        image: 211125403425.dkr.ecr.us-east-2.amazonaws.com/cloudgenius
+        image: 211125403425.dkr.ecr.us-east-1.amazonaws.com/cloudgenius
         imagePullPolicy: Always
         ports:
         - containerPort: 8085
