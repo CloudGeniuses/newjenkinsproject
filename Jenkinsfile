@@ -4,6 +4,7 @@ pipeline {
         ECR_URI = "211125403425.dkr.ecr.us-east-1.amazonaws.com/cloudgenius"
         AWS_REGION = 'us-east-1'
         DOCKER_IMAGE = 'cloudgenius'
+        EKS_CLUSTER = 'cloudgeniusk8s'
     }
     tools {
         maven 'maven'
