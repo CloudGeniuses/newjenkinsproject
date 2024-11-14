@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-        /*
+        
         stage('Integrate Jenkins with EKS Cluster and Deploy App') {
             steps {
                 withAWS(credentials: 'aws-cred', region: "${AWS_REGION}") {
@@ -44,6 +44,6 @@ pipeline {
                 }
             }
         }
-        */
+        
     }
 }
