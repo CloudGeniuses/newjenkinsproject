@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        ECR_URI = "211125403425.dkr.ecr.us-east-2.amazonaws.com/cloudgenius"
-        AWS_REGION = 'us-east-2'
+        ECR_URI = "211125403425.dkr.ecr.us-east-1.amazonaws.com/cloudgenius"
+        AWS_REGION = 'us-east-1'
         DOCKER_IMAGE = 'cloudgenius'
     }
     tools {
