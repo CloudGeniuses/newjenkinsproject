@@ -5,6 +5,7 @@ pipeline {
         AWS_REGION = 'us-east-1'
         DOCKER_IMAGE = 'cloudgenius'
         EKS_CLUSTER = 'cloudgeniusk8s'
+        KUBECTL_PATH = '~/bin/kubectl'
     }
     tools {
         maven 'maven'
@@ -40,7 +41,7 @@ pipeline {
                 withAWS(credentials: 'aws-cred', region: "${AWS_REGION}") {
                     script {
                         sh "aws eks --region ${AWS_REGION} update-kubeconfig --name ${EKS_CLUSTER}"
-                        sh "/var/lib/jenkins/kubectl apply -f eks-deploy-k8s.yaml"
+                        sh "${KUBECTL_PATH} apply -f eks-deploy-k8s.yaml"  // Use the defined path for kubectl
                     }
                 }
             }
